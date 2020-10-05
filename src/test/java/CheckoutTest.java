@@ -9,7 +9,7 @@ public class CheckoutTest extends BaseTest {
 
     public void NullFirstNameCheckoutTest() {
         checkoutPage.openPage();
-        checkoutPage.NullFirstNamecheckout("", "BH", "HZ");
+        checkoutPage.NullFirstNameCheckout("", "BH", "HZ");
         WebElement Errormessage = driver.findElement(By.cssSelector("#checkout_info_container > div > form > h3"));
 
     }
@@ -18,15 +18,16 @@ public class CheckoutTest extends BaseTest {
 
     public void NullLastNameCheckoutTest() {
         checkoutPage.openPage();
-        checkoutPage.NullLastNamecheckout("AJ", "", "HZ");
+        checkoutPage.NullLastNameCheckout("AJ", "", "HZ");
         WebElement Errormessage = driver.findElement(By.cssSelector("#checkout_info_container > div > form > h3"));
 
     }
+
     @Test
 
     public void NullPostalCodeCheckoutTest() {
         checkoutPage.openPage();
-        checkoutPage.NullPostalCodecheckout("AJ", "BH", "");
+        checkoutPage.NullPostalCodeCheckout("AJ", "BH", "");
         WebElement Errormessage = driver.findElement(By.cssSelector("#checkout_info_container > div > form > h3"));
 
     }
