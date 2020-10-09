@@ -8,11 +8,28 @@ import org.testng.annotations.Test;
 public class CheckoutTest extends BaseTest {
 
     @Test
+    public void ProductsShouldBeAddedIntoCart() {
+        loginPage.openPage()
+                .isPageOpened()
+                .login(USERNAME, PASSWORD)
+                .addToCart("Sauce Labs Fleece Jacket");
+        cartPage.openPage()
+                .isPageOpened()
+                .publicDetailsShouldBeLike("Sauce Labs Fleece Jacket", "1", "49.99");
+        checkoutPage.openPage()
+                .isPageOpened()
+                .checkout("AJ", "BH", "HZ");
+        overviewPage.openPage()
+                .isPageOpened();
+
+    }
+
+    @Test
 
     public void NullFirstNameCheckoutTest() {
         checkoutPage.openPage();
         checkoutPage.NullFirstNameCheckout("", "BH", "HZ");
-        WebElement Errormessage = driver.findElement(By.cssSelector("#checkout_info_container > div > form > h3"));
+        WebElement ErrorMessage = driver.findElement(By.xpath("//h3[contains(.,'First')]"));
 
     }
 
@@ -21,7 +38,7 @@ public class CheckoutTest extends BaseTest {
     public void NullLastNameCheckoutTest() {
         checkoutPage.openPage();
         checkoutPage.NullLastNameCheckout("AJ", "", "HZ");
-        WebElement Errormessage = driver.findElement(By.cssSelector("#checkout_info_container > div > form > h3"));
+        WebElement ErrorMessage = driver.findElement(By.xpath("//h3[starts-with(.,'Error')]"));
 
     }
 
@@ -30,7 +47,7 @@ public class CheckoutTest extends BaseTest {
     public void NullPostalCodeCheckoutTest() {
         checkoutPage.openPage();
         checkoutPage.NullPostalCodeCheckout("AJ", "BH", "");
-        WebElement Errormessage = driver.findElement(By.cssSelector("#checkout_info_container > div > form > h3"));
+        WebElement ErrorMessage = driver.findElement(By.xpath("//h3[contains(.,'Postal')]"));
 
     }
 }

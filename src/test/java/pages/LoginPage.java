@@ -19,23 +19,30 @@ public class LoginPage extends BasePage {
 
     }
 
-    public void isPageOpened() {
+    public LoginPage openPage() {
+        driver.get(URL);
+        return this;
+    }
+
+    public LoginPage isPageOpened() {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
         } catch (TimeoutException ex) {
             Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору" + LOGIN_BUTTON);
         }
+        return this;
     }
 
-
-    public void openPage() {
-        driver.get(URL);
-    }
-
-    public void login(String username, String password) {
+    public LoginPage attemptToLogin(String username, String password) {
         driver.findElement(USERNAME_INPUT).sendKeys("standard_user");
         driver.findElement(PASSWORD_INPUT).sendKeys("secret_sauce");
         driver.findElement(LOGIN_BUTTON).click();
+        return this;
+    }
+
+    public ProductsPage login(String username, String password) {
+        attemptToLogin(username, password);
+        return new ProductsPage(driver);
     }
 
     public void NullUsernameLogin(String username, String password) {
@@ -49,6 +56,14 @@ public class LoginPage extends BasePage {
         driver.findElement(PASSWORD_INPUT).sendKeys("");
         driver.findElement(LOGIN_BUTTON).click();
     }
-
-
+    public void UnknownUsernameLogin(String username, String password) {
+        driver.findElement(USERNAME_INPUT).sendKeys("bzbz");
+        driver.findElement(PASSWORD_INPUT).sendKeys("secret_sauce");
+        driver.findElement(LOGIN_BUTTON).click();
+    }
+    public void UnknownPasswordLogin(String username, String password) {
+        driver.findElement(USERNAME_INPUT).sendKeys("standard_user");
+        driver.findElement(PASSWORD_INPUT).sendKeys("bzbz");
+        driver.findElement(LOGIN_BUTTON).click();
+    }
 }
