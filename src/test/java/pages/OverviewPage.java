@@ -7,32 +7,30 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class OverviewPage extends BasePage {
-
     public static final String URL = "https://www.saucedemo.com/checkout-step-two.html";
     public static final By CART_BUTTON = By.cssSelector(".cart_button");
-
 
     public OverviewPage(WebDriver driver) {
         super(driver);
     }
 
     public OverviewPage openPage() {
-        driver.get(URL);
+       driver.get("https://www.saucedemo.com/checkout-step-two.html");
         return this;
     }
 
     public OverviewPage isPageOpened() {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(CART_BUTTON));
-        } catch (TimeoutException ex) {
+        } catch (TimeoutException var2) {
             Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору" + CART_BUTTON);
         }
+
         return this;
     }
-    public void finish () {
+
+    public void finish() {
         driver.findElement(CART_BUTTON).click();
         driver.findElement(By.className("pony_express"));
-
     }
-
 }

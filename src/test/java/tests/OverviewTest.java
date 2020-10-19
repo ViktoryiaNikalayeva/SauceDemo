@@ -4,8 +4,9 @@ import org.testng.annotations.Test;
 
 public class OverviewTest extends BaseTest {
 
+
     @Test
-    public void ProductsShouldBeAddedIntoCart() {
+    public void purchaseShouldBeFinished() {
         loginPage
                 .openPage()
                 .isPageOpened()
@@ -17,13 +18,10 @@ public class OverviewTest extends BaseTest {
                 .publicDetailsShouldBeLike("Sauce Labs Fleece Jacket", "1", "49.99");
         checkoutPage
                 .openPage()
-                .checkout("AJ", "BH", "HZ");
+                .checkout(FIRST_NAME, LAST_NAME, POSTAL_CODE);
         overviewPage
                 .openPage()
                 .isPageOpened()
                 .finish();
-
-
     }
-
 }
