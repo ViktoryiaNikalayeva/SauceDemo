@@ -1,53 +1,50 @@
 package tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 
+import static org.testng.Assert.assertEquals;
+
 public class CheckoutTest extends BaseTest {
 
+
     @Test
-    public void ProductsShouldBeAddedIntoCart() {
-        loginPage.openPage()
+    public void purchaseShouldBeFinished() {
+        loginPage
+                .openPage()
                 .isPageOpened()
                 .login(USERNAME, PASSWORD)
                 .addToCart("Sauce Labs Fleece Jacket");
-        cartPage.openPage()
+        cartPage
+                .openPage()
                 .isPageOpened()
                 .publicDetailsShouldBeLike("Sauce Labs Fleece Jacket", "1", "49.99");
-        checkoutPage.openPage()
+        checkoutPage
+                .openPage()
+                .checkout(FIRST_NAME, LAST_NAME, POSTAL_CODE);
+    }
+
+
+    @DataProvider
+    public Object[][] sortVars() {
+        return new Object[][]{
+                {"", LAST_NAME, POSTAL_CODE, "Error: First Name is required"},
+                {FIRST_NAME, "", POSTAL_CODE, "Error: Last Name is required"},
+                {FIRST_NAME, LAST_NAME, "", "Error: Postal Code is required"},
+                {"", "", POSTAL_CODE, "Error: First Name is required"},
+                {FIRST_NAME, "", "", "Error: Last Name is required"},
+                {"", LAST_NAME, "", "Error: First Name is required"}
+        };
+    }
+
+    @Test(dataProvider = "sortVars")
+    public void sortVars(String firstname, String lastname, String postalcode, String errorMessage) {
+        checkoutPage
+                .openPage()
                 .isPageOpened()
-                .checkout("AJ", "BH", "HZ");
-        overviewPage.openPage()
-                .isPageOpened();
-
-    }
-
-    @Test
-
-    public void NullFirstNameCheckoutTest() {
-        checkoutPage.openPage();
-        checkoutPage.NullFirstNameCheckout("", "BH", "HZ");
-        WebElement ErrorMessage = driver.findElement(By.xpath("//h3[contains(.,'First')]"));
-
-    }
-
-    @Test
-
-    public void NullLastNameCheckoutTest() {
-        checkoutPage.openPage();
-        checkoutPage.NullLastNameCheckout("AJ", "", "HZ");
-        WebElement ErrorMessage = driver.findElement(By.xpath("//h3[starts-with(.,'Error')]"));
-
-    }
-
-    @Test
-
-    public void NullPostalCodeCheckoutTest() {
-        checkoutPage.openPage();
-        checkoutPage.NullPostalCodeCheckout("AJ", "BH", "");
-        WebElement ErrorMessage = driver.findElement(By.xpath("//h3[contains(.,'Postal')]"));
-
+                .checkout(firstname, lastname, postalcode);
+        assertEquals(checkoutPage.getErrorMessageCheckout().getText(), errorMessage);
     }
 }
+

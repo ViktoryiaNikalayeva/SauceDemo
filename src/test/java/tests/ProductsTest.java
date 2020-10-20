@@ -1,54 +1,62 @@
 package tests;
 
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
-
 
 public class ProductsTest extends BaseTest {
 
+
     @Test
-    public void ProductsShouldBeAddedIntoCart() {
+    public void productsShouldBeAddedIntoCart() {
         loginPage
                 .openPage()
-                .login(USERNAME, PASSWORD)
                 .isPageOpened()
+                .login(USERNAME, PASSWORD)
                 .addToCart("Sauce Labs Fleece Jacket");
         cartPage
                 .openPage()
                 .isPageOpened()
                 .publicDetailsShouldBeLike("Sauce Labs Fleece Jacket", "1", "49.99");
-
     }
 
     @Test
-    public void productsShouldBeSortedByNameFromZToATest() {
-        productsPage
+    public void productsShouldBeSortedByNameZATest() {
+        WebElement firstItem = productsPage
                 .openPage()
                 .isPageOpened()
-                .sortingByNameZA("Name (Z to A)");
-
+                .sort("Name (Z to A)")
+                .getFirstItem();
+        Assert.assertEquals(firstItem.getText(), "Test.allTheThings() T-Shirt (Red)");
     }
+
     @Test
-    public void productsShouldBeSortedByNameFromAToZTest() {
-        productsPage
+    public void productsShouldBeSortedByNameAZTest() {
+        WebElement firstItem = productsPage
                 .openPage()
                 .isPageOpened()
-                .sortingByNameAZ("Name (A to Z)");
-
+                .sort("Name (A to Z)")
+                .getFirstItem();
+        Assert.assertEquals(firstItem.getText(), "Sauce Labs Backpack");
     }
+
     @Test
     public void productsShouldBeSortedByPriceLowHighTest() {
-        productsPage
+        WebElement firstItem = productsPage
                 .openPage()
                 .isPageOpened()
-                .sortingByPriceLowHigh("Price (low to high)");
-
+                .sort("Price (low to high)")
+                .getFirstItem();
+        Assert.assertEquals(firstItem.getText(), "Sauce Labs Onesie");
     }
+
     @Test
     public void productsShouldBeSortedByPriceHighLowTest() {
-        productsPage
+        WebElement firstItem = productsPage
                 .openPage()
                 .isPageOpened()
-                .sortingByPriceHighLow("Price (high to low)");
-
+                .sort("Price (high to low)")
+                .getFirstItem();
+        Assert.assertEquals(firstItem.getText(), "Sauce Labs Fleece Jacket");
     }
 }

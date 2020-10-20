@@ -1,52 +1,40 @@
 package tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertEquals;
 
 
 public class LoginTest extends BaseTest {
 
 
     @Test
-
-    public void UserShouldBeLoginUser() {
+    public void userShouldBeLoginUser() {
         loginPage
                 .openPage()
                 .isPageOpened()
                 .login(USERNAME, PASSWORD);
     }
 
-    @Test
-    public void NullUsernameLoginTest() {
-        loginPage.openPage();
-        loginPage.NullUsernameLogin("", PASSWORD);
-        WebElement ErrorMessage = driver.findElement(By.xpath("//h3[starts-with(.,'Epi')]"));
-
+    @DataProvider
+    public Object[][] loginVars() {
+        return new Object[][]{
+                {USERNAME, "", "Epic sadface: Password is required"},
+                {"", PASSWORD, "Epic sadface: Username is required"},
+                {"Lock", "Up78", "Epic sadface: Username and password do not match any user in this service"},
+                {"", "", "Epic sadface: Username is required"},
+                {"Lock", "", "Epic sadface: Password is required" },
+                {"", "Up78", "Epic sadface: Username is required" }
+        };
     }
 
-    @Test
-
-    public void NullPasswordLoginTest() {
-        loginPage.openPage();
-        loginPage.NullPasswordLogin(USERNAME, "");
-        WebElement ErrorMessage = driver.findElement(By.xpath("(//h3[contains(.,'Password')])"));
-
-    }
-    @Test
-
-    public void UnknownUsernameLoginTest() {
-        loginPage.openPage();
-        loginPage.UnknownUsernameLogin("bzbz", PASSWORD);
-        WebElement ErrorMessage = driver.findElement(By.xpath("(//h3[contains(.,'match')])"));
-
-    }
-    @Test
-
-    public void UnknownPasswordLoginTest() {
-        loginPage.openPage();
-        loginPage.UnknownPasswordLogin(USERNAME, "bzbz");
-        WebElement ErrorMessage = driver.findElement(By.xpath("(//h3[contains(.,'service')])"));
-
+    @Test(dataProvider = "loginVars")
+    public void loginVars(String username, String password, String errorMessage) {
+        loginPage
+                .openPage()
+                .isPageOpened()
+                .login(username, password);
+        assertEquals(loginPage.getErrorMessageLogin().getText(), errorMessage);
     }
 }
