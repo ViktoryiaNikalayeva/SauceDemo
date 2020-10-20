@@ -2,24 +2,28 @@ package tests;
 
 import org.testng.annotations.Test;
 
-public class CartTest extends BaseTest {
-    public CartTest() {
-    }
+public class OverviewTest extends BaseTest {
 
     @Test
-    public void ProductsShouldBeAddedIntoCartAndCheckout() {
-        loginPage.openPage()
+    public void ProductsShouldBeAddedIntoCart() {
+        loginPage
+                .openPage()
                 .isPageOpened()
                 .login(USERNAME, PASSWORD)
                 .addToCart("Sauce Labs Fleece Jacket");
-        cartPage.openPage()
+        cartPage
+                .openPage()
                 .isPageOpened()
                 .publicDetailsShouldBeLike("Sauce Labs Fleece Jacket", "1", "49.99");
         checkoutPage
                 .openPage()
-                .isPageOpened();
+                .checkout("AJ", "BH", "HZ");
+        overviewPage
+                .openPage()
+                .isPageOpened()
+                .finish();
+
 
     }
-
 
 }

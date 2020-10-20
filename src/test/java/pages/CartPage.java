@@ -20,19 +20,21 @@ public class CartPage extends BasePage {
         super(driver);
     }
 
-    public void isPageOpened() {
+    public CartPage isPageOpened() {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(CHECKOUT_BUTTON));
         } catch (TimeoutException ex) {
             Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору" + CHECKOUT_BUTTON);
         }
+        return this;
 
     }
 
     public static final String URL = "https://www.saucedemo.com/cart.html";
 
-    public void openPage() {
+    public CartPage openPage() {
         driver.get(URL);
+        return this;
     }
 
     public void publicDetailsShouldBeLike(String productName, String quantity, String price) {

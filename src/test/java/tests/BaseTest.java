@@ -5,10 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import pages.CartPage;
-import pages.CheckoutPage;
-import pages.LoginPage;
-import pages.ProductsPage;
+import pages.*;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,9 +15,14 @@ public class BaseTest {
     ProductsPage productsPage;
     CartPage cartPage;
     CheckoutPage checkoutPage;
+    OverviewPage overviewPage;
 
     public static final String USERNAME = "standard_user";
     public static final String PASSWORD = "secret_sauce";
+
+
+
+
 
     @BeforeMethod
 
@@ -35,6 +37,7 @@ public class BaseTest {
         productsPage = new ProductsPage(driver);
         cartPage = new CartPage(driver);
         checkoutPage = new CheckoutPage(driver);
+        overviewPage = new OverviewPage(driver);
     }
 
     @AfterMethod
