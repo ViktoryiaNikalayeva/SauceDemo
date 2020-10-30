@@ -38,7 +38,7 @@ public class CheckoutTest extends BaseTest {
         };
     }
 
-    @Test(dataProvider = "sortVars")
+    @Test(dataProvider = "sortVars", description = "trying to enter wrong data")
     public void sortVars(String firstname, String lastname, String postalcode, String errorMessage) {
         checkoutPage
                 .openPage()

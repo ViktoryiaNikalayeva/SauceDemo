@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -17,6 +18,7 @@ public class ProductsPage extends BasePage {
         super(driver);
     }
 
+    @Step("open Products Page at SauceDemo")
     public ProductsPage openPage() {
         driver.get("https://www.saucedemo.com/inventory.html");
         return this;
@@ -32,6 +34,7 @@ public class ProductsPage extends BasePage {
         return this;
     }
 
+    @Step("add to cart products")
     public ProductsPage addToCart(String productName) {
         driver.findElement(By.xpath(String.format(addToCartLocator, productName))).click();
         return this;

@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -8,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CheckoutPage extends BasePage {
-    public static final String URL = "https://www.saucedemo.com/checkout-step-one.html";
     public static final By FIRST_NAME_INPUT = By.id("first-name");
     public static final By LAST_NAME_INPUT = By.id("last-name");
     public static final By POSTAL_CODE_INPUT = By.id("postal-code");
@@ -19,6 +19,7 @@ public class CheckoutPage extends BasePage {
         super(driver);
     }
 
+    @Step("open Checkout Page at SauceDemo")
     public CheckoutPage openPage() {
         driver.get("https://www.saucedemo.com/checkout-step-one.html");
         return this;
@@ -34,6 +35,7 @@ public class CheckoutPage extends BasePage {
         return this;
     }
 
+    @Step("enter first, last name, postal code and finish checkout")
     public CheckoutPage checkout(String firstname, String lastname, String postalcode) {
         driver.findElement(FIRST_NAME_INPUT).sendKeys(firstname);
         driver.findElement(LAST_NAME_INPUT).sendKeys(lastname);

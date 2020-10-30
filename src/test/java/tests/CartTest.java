@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 public class CartTest extends BaseTest {
 
-    @Test
+    @Test (description = "add product")
     public void productsShouldBeAddedIntoCartAndCheckout() {
         loginPage
                 .openPage()

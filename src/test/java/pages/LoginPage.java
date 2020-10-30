@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -17,6 +18,7 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
+    @Step("open Login Page at SauceDemo")
     public LoginPage openPage() {
         driver.get("https://www.saucedemo.com");
         return this;
@@ -38,6 +40,10 @@ public class LoginPage extends BasePage {
         return this;
     }
 
+
+
+
+    @Step("enter username, password and click to finish login")
     public ProductsPage login(String username, String password) {
         attemptToLogin(username, password);
         return new ProductsPage(driver);

@@ -14,7 +14,7 @@ public class LoginTest extends BaseTest {
         loginPage
                 .openPage()
                 .isPageOpened()
-                .login(USERNAME, PASSWORD);
+                .login(USERNAME, System.getProperty("password", "secret_sauce"));
     }
 
     @DataProvider
@@ -29,7 +29,7 @@ public class LoginTest extends BaseTest {
         };
     }
 
-    @Test(dataProvider = "loginVars")
+    @Test(dataProvider = "loginVars", description = "trying to log in with wrong input")
     public void loginVars(String username, String password, String errorMessage) {
         loginPage
                 .openPage()

@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -14,8 +15,10 @@ public class OverviewPage extends BasePage {
         super(driver);
     }
 
+
+    @Step("open Overview Page at SauceDemo")
     public OverviewPage openPage() {
-       driver.get("https://www.saucedemo.com/checkout-step-two.html");
+        driver.get("https://www.saucedemo.com/checkout-step-two.html");
         return this;
     }
 
@@ -29,6 +32,7 @@ public class OverviewPage extends BasePage {
         return this;
     }
 
+    @Step("finish purchase in SauceDemo")
     public void finish() {
         driver.findElement(CART_BUTTON).click();
         driver.findElement(By.className("pony_express"));

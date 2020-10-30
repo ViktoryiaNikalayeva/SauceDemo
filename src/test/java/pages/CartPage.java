@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -25,6 +26,7 @@ public class CartPage extends BasePage {
         return this;
     }
 
+    @Step("open Cart Page at SauceDemo")
     public CartPage openPage() {
        driver.get("https://www.saucedemo.com/cart.html");
         return this;

@@ -14,10 +14,6 @@ public abstract class AbstractPage {
         wait = new WebDriverWait(driver, 10);
     }
 
-    public AbstractPage(WebDriver driver, String url) {
-        this(driver);
-        driver.get(url);
-    }
 
     public abstract AbstractPage isPageOpened();
 
