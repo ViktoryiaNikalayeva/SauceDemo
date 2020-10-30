@@ -12,7 +12,7 @@ public class CapabilitiesGenerator {
         if (os.contains("win")) {
             System.setProperty("webdriver.chrome.driver", driverPath + "/chromedriver.exe");
         } else if (os.contains("mac")) {
-            System.setProperty("webdriver.chrome.driver", driverPath + "/webdrivers/Linux/chromedriver");
+            System.setProperty("webdriver.chrome.driver", driverPath + "/webdrivers/linux/chromedriver");
         } else {
             System.setProperty("webdriver.chrome.driver", driverPath + "/linux/chromedriver");
         }
