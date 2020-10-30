@@ -12,6 +12,7 @@ import pages.CheckoutPage;
 import pages.LoginPage;
 import pages.OverviewPage;
 import pages.ProductsPage;
+import utils.CapabilitiesGenerator;
 
 public class BaseTest {
     WebDriver driver;
@@ -34,7 +35,7 @@ public class BaseTest {
         System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.setHeadless(true);
-        driver = new ChromeDriver(options);
+        driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         loginPage = new LoginPage(driver);
