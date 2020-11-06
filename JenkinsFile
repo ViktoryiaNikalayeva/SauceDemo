@@ -11,7 +11,7 @@ stages {
   stage('Run test') {
      steps {
         // Get some code from a GitHub repository
-        git branch: "${params.BRANCH}", url: 'https://github.com/dzmitryrak/AllureReporting.git'
+        git branch: "${params.BRANCH}", url: 'https://github.com/ViktoryiaNikalayeva/SauceDemo/tree/feature/30/10.git'
      }
   }
 }
