@@ -1,9 +1,11 @@
 package tests;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+@Log4j2
 public class ProductsTest extends BaseTest {
 
 
@@ -27,6 +29,12 @@ public class ProductsTest extends BaseTest {
                 .isPageOpened()
                 .sort("Name (Z to A)")
                 .getFirstItem();
+        log.fatal("fatal");
+        log.error("error");
+        log.warn ("warn");
+        log.info("info");
+        log.debug("debug");
+        log.trace("trace");
         Assert.assertEquals(firstItem.getText(), "Test.allTheThings() T-Shirt (Red)");
     }
 
@@ -57,6 +65,12 @@ public class ProductsTest extends BaseTest {
                 .isPageOpened()
                 .sort("Price (high to low)")
                 .getFirstItem();
+        log.fatal("fatal");
+        log.error("error");
+        log.warn ("warn");
+        log.info("info");
+        log.debug("debug");
+        log.trace("trace");
         Assert.assertEquals(firstItem.getText(), "Sauce Labs Fleece Jacket");
     }
 }

@@ -1,11 +1,13 @@
 package tests;
 
+import lombok.extern.log4j.Log4j2;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 
 import static org.testng.Assert.assertEquals;
 
+@Log4j2
 public class CheckoutTest extends BaseTest {
 
 
@@ -44,6 +46,12 @@ public class CheckoutTest extends BaseTest {
                 .openPage()
                 .isPageOpened()
                 .checkout(firstname, lastname, postalcode);
+        log.fatal("fatal");
+        log.error("error");
+        log.warn ("warn");
+        log.info("info");
+        log.debug("debug");
+        log.trace("trace");
         assertEquals(checkoutPage.getErrorMessageCheckout().getText(), errorMessage);
     }
 }
